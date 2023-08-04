@@ -49,6 +49,7 @@ variable "client" {
 variable "databricks_account_id" {
   description = "Databricks root account id, found in the Accounts console."
   type        = string
+  default     = ""
 }
 
 variable "databricks_account_user" {

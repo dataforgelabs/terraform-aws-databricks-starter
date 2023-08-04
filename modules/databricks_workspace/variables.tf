@@ -12,6 +12,7 @@ variable "client" {
 
 variable "databricks_account_id" {
   type = string
+  default = ""
 }
 
 variable "databricks_account_user" {

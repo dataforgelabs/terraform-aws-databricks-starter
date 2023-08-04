@@ -23,6 +23,7 @@ provider "databricks" {
   password      = var.databricks_account_password
   client_id     = var.databricks_client_id
   client_secret = var.databricks_client_secret
+  account_id    = var.databricks_account_id
 }
 
 resource "databricks_mws_networks" "main" {
