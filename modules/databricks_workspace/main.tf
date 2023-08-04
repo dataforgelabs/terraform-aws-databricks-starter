@@ -47,12 +47,12 @@ resource "databricks_mws_workspaces" "main" {
 }
 
 provider "databricks" {
-  alias                       = "dataops-workspace"
-  host                        = databricks_mws_workspaces.main.workspace_url
-  databricks_account_user     = var.databricks_account_user
-  databricks_account_password = var.databricks_account_password
-  databricks_client_id        = var.databricks_client_id
-  databricks_client_secret    = var.databricks_client_secret
+  alias         = "dataops-workspace"
+  host          = databricks_mws_workspaces.main.workspace_url
+  username      = var.databricks_account_user
+  password      = var.databricks_account_password
+  client_id     = var.databricks_client_id
+  secret_secret = var.databricks_client_secret
 }
 
 data "databricks_group" "admins" {
