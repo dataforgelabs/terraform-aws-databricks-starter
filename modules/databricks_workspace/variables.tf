@@ -15,19 +15,23 @@ variable "databricks_account_id" {
 }
 
 variable "databricks_account_user" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "databricks_account_password" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "databricks_client_id" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "databricks_client_secret" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "vpc_id" {
