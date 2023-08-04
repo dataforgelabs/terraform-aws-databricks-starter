@@ -59,6 +59,8 @@ module "databricks_workspace" {
   databricks_account_id       = var.databricks_account_id
   databricks_account_user     = var.databricks_account_user
   databricks_account_password = var.databricks_account_password
+  databricks_client_id        = var.databricks_client_id
+  databricks_client_secret    = var.databricks_client_secret
   vpc_id                      = module.networking.vpc_id
   databricks_az1_subnet_id    = module.networking.databricks_az1_subnet_id
   databricks_az2_subnet_id    = module.networking.databricks_az2_subnet_id
