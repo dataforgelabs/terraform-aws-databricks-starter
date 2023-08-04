@@ -52,7 +52,7 @@ provider "databricks" {
   username      = var.databricks_account_user
   password      = var.databricks_account_password
   client_id     = var.databricks_client_id
-  secret_secret = var.databricks_client_secret
+  client_secret = var.databricks_client_secret
 }
 
 data "databricks_group" "admins" {
