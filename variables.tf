@@ -54,11 +54,25 @@ variable "databricks_account_id" {
 variable "databricks_account_user" {
   description = "Admin account user for Databricks account. Must be able to create workspaces. Format should be the email address of the user."
   type        = string
+  default     = ""
 }
 
 variable "databricks_account_password" {
   description = "Admin account password"
   type        = string
+  default     = ""
+}
+
+variable "databricks_client_id" {
+  description = "Client id for service principal used to connect to Databricks account"
+  type        = string
+  default     = ""
+}
+
+variable "databricks_client_secret" {
+  description = "Client secret for service principal used to connect to Databricks account"
+  type        = string
+  default     = ""
 }
 
 variable "vpc_cidr_block" {

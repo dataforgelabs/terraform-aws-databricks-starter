@@ -22,6 +22,14 @@ variable "databricks_account_password" {
   type = string
 }
 
+variable "databricks_client_id" {
+  type = string
+}
+
+variable "databricks_client_secret" {
+  type = string
+}
+
 variable "vpc_id" {
   type = string
 }
