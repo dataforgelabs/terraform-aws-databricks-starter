@@ -63,12 +63,14 @@ data "databricks_group" "admins" {
 }
 
 resource "databricks_user" "admin" {
+  provider     = databricks.dataops-workspace
   count      = var.databricks_workspace_admin_email != "" ? 1 : 0
   user_name  = var.databricks_workspace_admin_email
   depends_on = [databricks_mws_workspaces.main]
 }
 
 resource "databricks_group_member" "admin" {
+  provider     = databricks.dataops-workspace
   count      = var.databricks_workspace_admin_email != "" ? 1 : 0
   group_id   = data.databricks_group.admins[0].id
   member_id  = databricks_user.admin[0].id
