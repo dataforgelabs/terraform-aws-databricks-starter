@@ -45,3 +45,32 @@ resource "databricks_mws_workspaces" "main" {
   storage_configuration_id = databricks_mws_storage_configurations.main.storage_configuration_id
   network_id               = databricks_mws_networks.main.network_id
 }
+
+provider "databricks" {
+  alias                       = "dataops-workspace"
+  host                        = databricks_mws_workspaces.main.workspace_url
+  databricks_account_user     = var.databricks_account_user
+  databricks_account_password = var.databricks_account_password
+  databricks_client_id        = var.databricks_client_id
+  databricks_client_secret    = var.databricks_client_secret
+}
+
+data "databricks_group" "admins" {
+  provider     = databricks.dataops-workspace
+  count        = var.databricks_workspace_admin_email != "" ? 1 : 0
+  display_name = "admins"
+  depends_on   = [databricks_mws_workspaces.main]
+}
+
+resource "databricks_user" "admin" {
+  count      = var.databricks_workspace_admin_email != "" ? 1 : 0
+  user_name  = var.databricks_workspace_admin_email
+  depends_on = [databricks_mws_workspaces.main]
+}
+
+resource "databricks_group_member" "admin" {
+  count      = var.databricks_workspace_admin_email != "" ? 1 : 0
+  group_id   = data.databricks_group.admins[0].id
+  member_id  = databricks_user.admin[0].id
+  depends_on = [databricks_mws_workspaces.main]
+}

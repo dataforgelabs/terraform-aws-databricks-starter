@@ -76,6 +76,12 @@ variable "databricks_client_secret" {
   default     = ""
 }
 
+variable "databricks_workspace_admin_email" {
+  description = "If using a service principal, add an admin account that will be the first user granted access to the workspace"
+  type        = string
+  default     = ""
+}
+
 variable "vpc_cidr_block" {
   description = "Full CIDR range for VPC. Ex: 10.1.0.0/16"
   type        = string
