@@ -2,11 +2,7 @@ variable "region" {
   type = string
 }
 
-variable "environment" {
-  type = string
-}
-
-variable "client" {
+variable "environment_prefix" {
   type = string
 }
 

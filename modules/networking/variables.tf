@@ -3,13 +3,8 @@ variable "region" {
   type        = string
 }
 
-variable "environment" {
+variable "environment_prefix" {
   description = "Prefix for resource names - these should be the same as provided during signup"
-  type        = string
-}
-
-variable "client" {
-  description = "Suffix for resource names - these should be the same as provided during signup"
   type        = string
 }
 

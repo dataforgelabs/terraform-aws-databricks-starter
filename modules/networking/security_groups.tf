@@ -1,5 +1,5 @@
 resource "aws_security_group" "main" {
-  name        = "${local.commonTags.Environment}-Databricks-${local.commonTags.Client}"
+  name        = "${local.commonTags.Environment}-Databricks"
   description = "Databricks Workspace Security Group"
   vpc_id      = var.existing_vpc_id == "" ? aws_vpc.main[0].id : var.existing_vpc_id
 
@@ -38,7 +38,7 @@ resource "aws_security_group" "main" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-Databricks-${local.commonTags.Client}",
+      { "Name" = "${local.commonTags.Environment}-Databricks",
       "Application" = "Databricks" }
     )
   )

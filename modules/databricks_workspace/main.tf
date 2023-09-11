@@ -11,8 +11,7 @@ data "aws_caller_identity" "current" {}
 
 locals {
   commonTags = {
-    Environment = var.environment,
-    Client      = var.client
+    Environment = var.environment_prefix
   }
 }
 
@@ -29,7 +28,7 @@ provider "databricks" {
 resource "databricks_mws_networks" "main" {
   provider           = databricks.mws
   account_id         = var.databricks_account_id
-  network_name       = "${local.commonTags.Environment}-mws-network-${local.commonTags.Client}"
+  network_name       = "${local.commonTags.Environment}-mws-network"
   subnet_ids         = [var.databricks_az1_subnet_id, var.databricks_az2_subnet_id]
   vpc_id             = var.vpc_id
   security_group_ids = [var.security_group_id]

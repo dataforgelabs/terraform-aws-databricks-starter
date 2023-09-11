@@ -10,8 +10,8 @@ data "aws_iam_policy_document" "assume_role_ec2" {
 }
 
 resource "aws_iam_role" "instance_profile_role" {
-  name               = "${local.commonTags.Environment}-instance-profile-role-${local.commonTags.Client}"
-  description        = "${local.commonTags.Environment}-${local.commonTags.Client} Databricks Instance Profile Role for S3 and EC2 access"
+  name               = "${local.commonTags.Environment}-instance-profile-role"
+  description        = "${local.commonTags.Environment} Databricks Instance Profile Role for S3 and EC2 access"
   assume_role_policy = data.aws_iam_policy_document.assume_role_ec2.json
   tags               = local.commonTags
 }
@@ -34,7 +34,7 @@ data "aws_iam_policy_document" "datalake_s3_access" {
 }
 
 resource "aws_iam_policy" "datalake_s3_policy" {
-  name   = "${local.commonTags.Environment}-datalake-s3-policy-${local.commonTags.Client}"
+  name   = "${local.commonTags.Environment}-datalake-s3-policy"
   policy = data.aws_iam_policy_document.datalake_s3_access.json
   lifecycle {
     ignore_changes = [policy]
@@ -47,7 +47,7 @@ resource "aws_iam_role_policy_attachment" "datalake_s3_attachment" {
 }
 
 resource "aws_iam_instance_profile" "main" {
-  name = "${local.commonTags.Environment}-instance-profile-${local.commonTags.Client}"
+  name = "${local.commonTags.Environment}-instance-profile"
   role = aws_iam_role.instance_profile_role.name
 }
 
@@ -69,7 +69,7 @@ data "databricks_aws_assume_role_policy" "main" {
 }
 
 resource "aws_iam_role" "cross_account_role" {
-  name               = "${local.commonTags.Environment}-cross-account-${local.commonTags.Client}"
+  name               = "${local.commonTags.Environment}-cross-account"
   assume_role_policy = data.databricks_aws_assume_role_policy.main.json
   tags               = local.commonTags
 }
@@ -79,7 +79,7 @@ data "databricks_aws_crossaccount_policy" "main" {
 }
 
 resource "aws_iam_role_policy" "cross_account" {
-  name   = "${local.commonTags.Environment}-databricks-cross-account-${local.commonTags.Client}"
+  name   = "${local.commonTags.Environment}-databricks-cross-account"
   role   = aws_iam_role.cross_account_role.id
   policy = data.databricks_aws_crossaccount_policy.main.json
 }
@@ -88,7 +88,7 @@ resource "databricks_mws_credentials" "main" {
   provider         = databricks.mws
   account_id       = var.databricks_account_id
   role_arn         = aws_iam_role.cross_account_role.arn
-  credentials_name = "${local.commonTags.Environment}-mws-credentials-${local.commonTags.Client}"
+  credentials_name = "${local.commonTags.Environment}-mws-credentials"
 
   // not explicitly needed by this, but to make sure a smooth deployment
   depends_on = [aws_iam_role_policy.cross_account]
@@ -99,5 +99,5 @@ resource "databricks_mws_storage_configurations" "main" {
   provider                   = databricks.mws
   account_id                 = var.databricks_account_id
   bucket_name                = aws_s3_bucket.main.bucket
-  storage_configuration_name = "${local.commonTags.Environment}-mws-storage-${local.commonTags.Client}"
+  storage_configuration_name = "${local.commonTags.Environment}-mws-storage"
 }

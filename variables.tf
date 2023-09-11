@@ -25,23 +25,11 @@ variable "shared_config_location" {
   default     = ["~/.aws/config"]
 }
 
-
-//TODO - should we change these to just be <resource_name>-<environment>
-//Other idea - change this to "resource_suffix" and create all resources with short identifier+suffix, like vpc-<suffix>
-variable "environment" {
-  description = "Prefix for resource names - these should be the same as provided during signup"
+variable "environment_prefix" {
+  description = "Environment prefix for resource names"
   type        = string
   validation {
-    condition     = length(var.environment) > 0
-    error_message = "Variable cannot be empty string"
-  }
-}
-
-variable "client" {
-  description = "Suffix for resource names - these should be the same as provided during signup"
-  type        = string
-  validation {
-    condition     = length(var.client) > 0
+    condition     = length(var.environment_prefix) > 0
     error_message = "Variable cannot be empty string"
   }
 }

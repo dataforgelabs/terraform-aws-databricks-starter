@@ -25,16 +25,13 @@ locals {
   databricks_az1_subnet_full = var.databricks_az1_subnet == "" ? "${var.vpc_first_two_octets}.128.0/18" : var.databricks_az1_subnet
   databricks_az2_subnet_full = var.databricks_az2_subnet == "" ? "${var.vpc_first_two_octets}.192.0/18" : var.databricks_az2_subnet
   commonTags = {
-    Environment = var.environment,
-    Client      = var.client
+    Environment = var.environment_prefix
   }
 }
 
 module "networking" {
   source = "./modules/networking"
-
-  client                            = var.client
-  environment                       = var.environment
+  environment                       = var.environment_prefix
   region                            = var.region
   vpc_cidr_full                     = local.vpc_cidr_full
   public_subnet_full                = local.public_subnet_full
@@ -52,9 +49,7 @@ module "networking" {
 
 module "databricks_workspace" {
   source = "./modules/databricks_workspace"
-
-  client                           = var.client
-  environment                      = var.environment
+  environment                      = var.environment_prefix
   region                           = var.region
   databricks_account_id            = var.databricks_account_id
   databricks_account_user          = var.databricks_account_user

@@ -20,7 +20,7 @@ resource "aws_vpc_endpoint" "s3" {
   tags = merge(
     local.commonTags,
     tomap(
-      {"Name" = "${local.commonTags.Environment}-VpcEndpoint-${local.commonTags.Client}"}
+      {"Name" = "${local.commonTags.Environment}-VpcEndpoint"}
     )
   )
 }
@@ -32,7 +32,7 @@ resource "aws_internet_gateway" "main" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-InternetGateway-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-InternetGateway" }
     )
   )
 }
@@ -44,7 +44,7 @@ resource "aws_eip" "nat_ip" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-ElasticIp-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-ElasticIp" }
     )
   )
 }
@@ -57,7 +57,7 @@ resource "aws_nat_gateway" "main" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-NatGateway-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-NatGateway" }
     )
   )
 }
@@ -78,7 +78,7 @@ resource "aws_route_table" "public" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-External-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-External" }
     )
   )
 }
@@ -99,7 +99,7 @@ resource "aws_route_table" "internal" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-Internal-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-Internal" }
     )
   )
 }
@@ -129,7 +129,7 @@ resource "aws_vpc_dhcp_options" "main" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-DHCPInternalComputer-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-DHCPInternalComputer" }
     )
   )
 }
@@ -164,7 +164,7 @@ resource "aws_network_acl" "main" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-NetworkACL-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-NetworkACL" }
     )
   )
 }

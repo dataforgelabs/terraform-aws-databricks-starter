@@ -1,10 +1,10 @@
 resource "aws_s3_bucket" "main" {
-  bucket = lower("${local.commonTags.Environment}-datalake-${local.commonTags.Client}")
+  bucket = lower("${local.commonTags.Environment}-datalake")
 
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-Datalake-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-Datalake" }
     )
   )
 
@@ -21,7 +21,7 @@ resource "aws_s3_bucket_ownership_controls" "main" {
 resource "aws_s3_bucket_lifecycle_configuration" "main" {
   bucket = aws_s3_bucket.main.id
   rule {
-    id     = lower("${local.commonTags.Environment}-datalake-tiering-${local.commonTags.Client}")
+    id     = lower("${local.commonTags.Environment}-datalake-tiering")
     status = "Enabled"
 
     transition {

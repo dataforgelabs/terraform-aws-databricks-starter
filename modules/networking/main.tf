@@ -2,8 +2,7 @@ data "aws_caller_identity" "current" {}
 
 locals {
   commonTags = {
-    Environment = var.environment,
-    Client      = var.client
+    Environment = var.environment_prefix
   }
 }
 
@@ -16,7 +15,7 @@ resource "aws_vpc" "main" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-Databricks-VPC-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-Databricks-VPC" }
     )
   )
 }

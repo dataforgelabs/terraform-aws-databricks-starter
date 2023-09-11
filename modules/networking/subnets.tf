@@ -7,7 +7,7 @@ resource "aws_subnet" "public" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-WebAZ1-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-WebAZ1" }
     )
   )
 }
@@ -21,7 +21,7 @@ resource "aws_subnet" "databricks_az1" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-DatabricksAZ1-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-DatabricksAZ1" }
     )
   )
 }
@@ -35,7 +35,7 @@ resource "aws_subnet" "databricks_az2" {
   tags = merge(
     local.commonTags,
     tomap(
-      { "Name" = "${local.commonTags.Environment}-DatabricksAZ2-${local.commonTags.Client}" }
+      { "Name" = "${local.commonTags.Environment}-DatabricksAZ2" }
     )
   )
 }
