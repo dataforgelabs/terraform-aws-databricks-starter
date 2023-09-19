@@ -31,7 +31,7 @@ locals {
 
 module "networking" {
   source = "./modules/networking"
-  environment                       = var.environment_prefix
+  environment_prefix                = var.environment_prefix
   region                            = var.region
   vpc_cidr_full                     = local.vpc_cidr_full
   public_subnet_full                = local.public_subnet_full
@@ -49,7 +49,7 @@ module "networking" {
 
 module "databricks_workspace" {
   source = "./modules/databricks_workspace"
-  environment                      = var.environment_prefix
+  environment_prefix               = var.environment_prefix
   region                           = var.region
   databricks_account_id            = var.databricks_account_id
   databricks_account_user          = var.databricks_account_user
