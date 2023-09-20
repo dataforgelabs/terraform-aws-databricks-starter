@@ -37,7 +37,6 @@ variable "environment_prefix" {
 variable "databricks_account_id" {
   description = "Databricks root account id, found in the Accounts console."
   type        = string
-  default     = ""
 }
 
 variable "databricks_account_user" {
@@ -53,7 +52,7 @@ variable "databricks_account_password" {
 }
 
 variable "databricks_client_id" {
-  description = "Client id for service principal used to connect to Databricks account"
+  description = "Client id for service principal used to connect to Databricks account. Use if not using databricks account user email/password for authentication."
   type        = string
   default     = ""
 }
@@ -65,13 +64,13 @@ variable "databricks_client_secret" {
 }
 
 variable "databricks_workspace_admin_email" {
-  description = "If using a service principal, add an admin account that will be the first user granted access to the workspace"
+  description = "If using a service principal, add an admin account that will be the first user granted access to the workspace. If using user email/password, this is not needed, as that user will have access to the workspace."
   type        = string
   default     = ""
 }
 
 variable "vpc_cidr_block" {
-  description = "Full CIDR range for VPC. Ex: 10.1.0.0/16"
+  description = "Full CIDR range for VPC. Ex: 10.1.0.0/16. Use if not using the vpc_first_two_octets variable"
   type        = string
   default     = ""
 }
@@ -79,31 +78,31 @@ variable "vpc_cidr_block" {
 variable "vpc_first_two_octets" {
   description = "First two octets for VPC range, use if using DataForge default deployment. Ex: 10.1"
   type        = string
-  default     = ""
+  default     = "10.1"
 }
 
 variable "existing_vpc_id" {
-  description = "Existing VPC id to deploy Databricks workspace to. Ex: vpc-123456789"
+  description = "Existing VPC id to deploy Databricks workspace to. Ex: vpc-123456789. Needs to be defined if not using the vpc_first_two_octets variable"
   type        = string
   default     = ""
 }
 
 
 variable "databricks_az1_subnet" {
-  description = "AZ1 Subnet for Databricks. Ex: 10.1.128.0/18"
+  description = "AZ1 Subnet for Databricks. Ex: 10.1.128.0/18. Needs to be defined if not using the vpc_first_two_octets variable."
   type        = string
   default     = ""
 }
 
 
 variable "databricks_az2_subnet" {
-  description = "AZ2 Subnet for Databricks. Ex: 10.1.192.0/18"
+  description = "AZ2 Subnet for Databricks. Ex: 10.1.192.0/18. Needs to be defined if not using the vpc_first_two_octets variable."
   type        = string
   default     = ""
 }
 
 variable "public_subnet" {
-  description = "Public subnet id to host NAT gateway. Ex: subnet-123456789"
+  description = "Public subnet id to host NAT gateway. Ex: subnet-123456789.  Needs to be defined if not using the vpc_first_two_octets variable."
   type        = string
   default     = ""
 }
