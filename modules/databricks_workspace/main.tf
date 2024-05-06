@@ -39,7 +39,6 @@ resource "databricks_mws_workspaces" "main" {
   account_id               = var.databricks_account_id
   aws_region               = var.region
   workspace_name           = lower(local.commonTags.Environment)
-  deployment_name          = lower(local.commonTags.Environment)
   credentials_id           = databricks_mws_credentials.main.credentials_id
   storage_configuration_id = databricks_mws_storage_configurations.main.storage_configuration_id
   network_id               = databricks_mws_networks.main.network_id
