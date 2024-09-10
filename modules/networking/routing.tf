@@ -168,3 +168,15 @@ resource "aws_network_acl" "main" {
     )
   )
 }
+
+resource "aws_vpc_endpoint_route_table_association" "attach_internal" {
+  count  = var.existing_internal_route_table_id == "" ? 1 : 0
+  route_table_id  = aws_route_table.internal[0].id
+  vpc_endpoint_id = aws_vpc_endpoint.s3.id
+}
+
+resource "aws_vpc_endpoint_route_table_association" "attach_public" {
+  count  = var.existing_public_route_table_id == "" ? 1 : 0
+  route_table_id  = aws_route_table.public[0].id
+  vpc_endpoint_id = aws_vpc_endpoint.s3.id
+}
