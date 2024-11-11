@@ -18,8 +18,6 @@ locals {
 provider "databricks" {
   alias         = "mws"
   host          = "https://accounts.cloud.databricks.com/"
-  username      = var.databricks_account_user
-  password      = var.databricks_account_password
   client_id     = var.databricks_client_id
   client_secret = var.databricks_client_secret
   account_id    = var.databricks_account_id
@@ -47,8 +45,6 @@ resource "databricks_mws_workspaces" "main" {
 provider "databricks" {
   alias         = "dataops-workspace"
   host          = databricks_mws_workspaces.main.workspace_url
-  username      = var.databricks_account_user
-  password      = var.databricks_account_password
   client_id     = var.databricks_client_id
   client_secret = var.databricks_client_secret
 }

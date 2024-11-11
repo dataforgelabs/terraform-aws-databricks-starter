@@ -10,14 +10,6 @@ variable "databricks_account_id" {
   type = string
 }
 
-variable "databricks_account_user" {
-  type = string
-}
-
-variable "databricks_account_password" {
-  type = string
-}
-
 variable "databricks_client_id" {
   type = string
 }
